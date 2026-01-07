@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Terminal, Lock, Mail, ChevronRight, User, Play } from 'lucide-react';
@@ -18,10 +19,11 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     if (e) e.preventDefault();
     setLoading(true);
     
-    const finalName = demoName || name || 'Demo User';
+    const finalName = demoName || name || email.split('@')[0] || 'User';
     
+    // Simulate a network delay
     setTimeout(() => {
-      mockAuth.login(finalName);
+      mockAuth.login(finalName, email);
       onLogin(finalName);
       // Redirecting straight to Optimizer for faster workflow
       navigate('/optimize');
@@ -31,6 +33,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center p-6 relative overflow-hidden">
+      {/* Background Glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/10 blur-[120px] rounded-full" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/10 blur-[120px] rounded-full" />
       
@@ -40,15 +43,17 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             <Terminal className="text-white w-8 h-8" />
           </div>
           <h1 className="text-4xl font-extrabold text-white mb-2 tracking-tight">
-            {isSignup ? 'Join OptiCode' : 'Welcome Back'}
+            {isSignup ? 'Create Account' : 'Welcome Back'}
           </h1>
-          
+          <p className="text-gray-500 font-medium">
+            {isSignup ? 'Join the next generation of developers' : 'Log in to continue your work'}
+          </p>
         </div>
 
         <div className="bg-[#111]/80 border border-white/5 p-8 rounded-[40px] shadow-2xl backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-500">
           <form onSubmit={(e) => handleAuth(e)} className="space-y-5">
             {isSignup && (
-              <div className="space-y-2">
+              <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
                 <label className="text-xs font-bold text-gray-500 uppercase ml-1">Full Name</label>
                 <div className="relative">
                   <User className="absolute left-4 top-3.5 text-gray-600 w-5 h-5" />
@@ -58,11 +63,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                     onChange={(e) => setName(e.target.value)}
                     className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600/40 transition-all"
                     placeholder="E.g. John Doe"
-                    required
+                    required={isSignup}
                   />
                 </div>
               </div>
             )}
+
             <div className="space-y-2">
               <label className="text-xs font-bold text-gray-500 uppercase ml-1">Email Address</label>
               <div className="relative">
@@ -72,41 +78,47 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600/40 transition-all"
-                  placeholder="demo@presentation.com"
+                  placeholder="demo@opticode.ai"
                   required
                 />
               </div>
             </div>
-            {!isSignup && (
-              <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-500 uppercase ml-1">Password</label>
-                <div className="relative">
-                  <Lock className="absolute left-4 top-3.5 text-gray-600 w-5 h-5" />
-                  <input
-                    type="password"
-                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600/40 transition-all"
-                    placeholder="••••••••"
-                    required
-                  />
-                </div>
-              </div>
-            )}
-            
 
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-gray-500 uppercase ml-1">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-4 top-3.5 text-gray-600 w-5 h-5" />
+                <input
+                  type="password"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-600/40 transition-all"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+            </div>
+            
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-blue-600/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-50 mt-4"
+            >
+              {loading ? 'Processing...' : isSignup ? 'Create Account' : 'Sign In'}
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
           </form>
 
           <div className="relative my-8">
-
           </div>
 
-          <button
-            onClick={() => handleAuth(undefined, 'Guest Presenter')}
-            disabled={loading}
-             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl shadow-xl shadow-blue-600/20 transition-all flex items-center justify-center gap-2 group disabled:opacity-50"
+          <div className="space-y-4">
+            <button
+              onClick={() => setIsSignup(!isSignup)}
+              className="w-full text-gray-400 hover:text-white text-sm font-medium transition-colors"
             >
-            Sign In
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
+              {isSignup ? 'Already have an account? Sign in' : "Don't have an account? Create one"}
+            </button>
+
+          </div>
         </div>
       </div>
     </div>
