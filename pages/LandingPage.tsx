@@ -13,7 +13,7 @@ const LandingPage: React.FC = () => {
       <nav className="relative z-10 flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
         <div className="flex items-center gap-3">
           <div className="bg-blue-600 p-2 rounded-lg"><Terminal className="w-6 h-6 text-white" /></div>
-          <span className="text-xl font-bold tracking-tight">OptiCode AI</span>
+          <span className="text-xl font-bold tracking-tight">OptiCode </span>
         </div>
         <button onClick={() => navigate('/login')} className="px-6 py-2 bg-white/5 border border-white/10 rounded-full hover:bg-white/10 transition-all font-medium">Sign In</button>
       </nav>
@@ -30,8 +30,7 @@ const LandingPage: React.FC = () => {
           <button onClick={() => navigate('/login')} className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-600/20 transition-all flex items-center justify-center gap-2 group">
             Start Optimizing<ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </button>
-          <button className="w-full sm:w-auto px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl font-bold text-lg transition-all">Quick Demo</button>
-        </div>
+          </div>
       </section>
 
       <section className="relative z-10 py-24 px-6 max-w-7xl mx-auto">

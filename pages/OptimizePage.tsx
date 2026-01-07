@@ -134,13 +134,13 @@ const OptimizePage: React.FC = () => {
             onClick={() => setSelectedLevel(OptimizationLevel.LEVEL_1)} 
             className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all font-bold text-sm ${selectedLevel === OptimizationLevel.LEVEL_1 ? 'bg-green-600 text-white shadow-lg shadow-green-600/20' : 'text-gray-500 hover:text-white'}`}
           >
-            <Cpu className="w-4 h-4" /> Syntax
+            <Cpu className="w-4 h-4" /> Level 1
           </button>
           <button 
             onClick={() => setSelectedLevel(OptimizationLevel.LEVEL_2)} 
             className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all font-bold text-sm ${selectedLevel === OptimizationLevel.LEVEL_2 ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-gray-400 hover:text-white'}`}
           >
-            <BrainCircuit className="w-4 h-4" /> AI Logic
+            <BrainCircuit className="w-4 h-4" /> Level 2
           </button>
         </div>
       </div>
@@ -172,7 +172,7 @@ const OptimizePage: React.FC = () => {
                 className={`text-xs font-bold px-3 py-1 rounded-lg transition-all flex items-center gap-2 ${hasJustSaved ? 'text-green-400 bg-green-400/10 border border-green-400/20' : 'text-blue-400 hover:bg-blue-400/10'}`}
               >
                 {hasJustSaved ? <CheckCircle2 className="w-3.5 h-3.5" /> : <Bookmark className="w-3.5 h-3.5" />}
-                {hasJustSaved ? 'Pinned' : 'Pin to Library'}
+                {hasJustSaved ? 'Saved' : 'Save to Profile'}
               </button>
             )}
           </div>
