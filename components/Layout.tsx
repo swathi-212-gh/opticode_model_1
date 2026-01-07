@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children, user, onLogout }) => {
 
   const navItems = [
     { name: 'Optimizer', path: '/optimize', icon: Zap },
-    { name: 'Library', path: '/history', icon: History },
+
     { name: 'Profile', path: '/profile', icon: UserCircle },
   ];
 
