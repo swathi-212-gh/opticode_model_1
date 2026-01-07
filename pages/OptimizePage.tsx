@@ -140,7 +140,7 @@ const OptimizePage: React.FC = () => {
             onClick={() => setSelectedLevel(OptimizationLevel.LEVEL_2)} 
             className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all font-bold text-sm ${selectedLevel === OptimizationLevel.LEVEL_2 ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20' : 'text-gray-400 hover:text-white'}`}
           >
-            <BrainCircuit className="w-4 h-4" /> Level 2
+            <BrainCircuit className="w-4 h-4" /> Level
           </button>
         </div>
       </div>
