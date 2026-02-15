@@ -3,12 +3,11 @@ from flask_cors import CORS
 from core.pipeline import process_code
 
 app = Flask(__name__)
-CORS(app)  # allows React (Vite) to call backend later
+CORS(app, origins=["http://localhost:5173"])  # restrict to frontend port
 
-@app.route("/analyze", methods=["POST"])
+@app.route("/api/analyze", methods=["POST"])
 def analyze():
     data = request.get_json(silent=True)
-
     if not data or "code" not in data:
         return jsonify({
             "status": "error",
@@ -16,15 +15,15 @@ def analyze():
         }), 400
 
     code = data["code"]
-
     result = process_code(code)
-    return jsonify(result), 200
+    return jsonify({
+        "status": "success",
+        "data": result
+    }), 200
 
-
-@app.route("/health", methods=["GET"])
+@app.route("/api/health", methods=["GET"])
 def health():
     return jsonify({"status": "ok"}), 200
-
 
 if __name__ == "__main__":
     app.run(debug=True)

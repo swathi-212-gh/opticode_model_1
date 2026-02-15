@@ -162,8 +162,6 @@ class LevelOneOptimizer(ast.NodeTransformer):
         return RemoveUnusedAssign(self.used_vars).visit(tree)
 
 
-
-
 def optimize_code(source_code: str) -> str:
     try:
         tree = ast.parse(source_code)
